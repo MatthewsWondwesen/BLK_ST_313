@@ -45,10 +45,6 @@ function renderUnitBubbles() {
         <span class="bubble-number">${unit.number}</span>
         <span class="bubble-label">${unit.shortLabel}</span>
       </span>
-      <span class="bubble-tooltip" role="tooltip">
-        <strong>${unit.title}</strong>
-        <span>${unit.description}</span>
-      </span>
     </button>
   `
     )

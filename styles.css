@@ -331,56 +331,6 @@ body {
   line-height: 1.2;
 }
 
-/* Tooltip on hover */
-.bubble-tooltip {
-  position: absolute;
-  bottom: calc(100% + 1rem);
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  width: min(320px, 85vw);
-  padding: 1.1rem 1.25rem;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--purple-100);
-  border-radius: 12px;
-  box-shadow: 0 12px 40px var(--shadow);
-  text-align: left;
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: var(--purple-100);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-  z-index: 10;
-}
-
-.bubble-tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 8px solid transparent;
-  border-top-color: var(--white);
-}
-
-.bubble-tooltip strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--purple-120);
-  margin-bottom: 0.5rem;
-}
-
-.unit-bubble:hover .bubble-tooltip,
-.unit-bubble:focus-visible .bubble-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
 /* Unit detail view */
 #unit-view {
   max-width: 960px;
@@ -783,18 +733,6 @@ body {
 @media (max-width: 600px) {
   .unit-bubbles {
     gap: 3.5rem 1.5rem;
-  }
-
-  .bubble-tooltip {
-    bottom: auto;
-    top: calc(100% + 1rem);
-  }
-
-  .bubble-tooltip::after {
-    top: auto;
-    bottom: 100%;
-    border-top-color: transparent;
-    border-bottom-color: var(--white);
   }
 
   .description,
