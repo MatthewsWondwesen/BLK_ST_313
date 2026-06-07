@@ -63,17 +63,44 @@ function applyUnitTheme(unitId) {
   const theme = UNIT_THEMES[unitId];
   if (!theme) return;
 
-  document.body.classList.add("unit-theme-active");
-  document.body.dataset.unitTheme = unitId;
-  document.body.style.setProperty("--unit-primary", theme.primary);
-  document.body.style.setProperty("--unit-secondary", theme.secondary);
-  document.body.style.setProperty("--unit-text", theme.text);
-  document.body.style.setProperty("--unit-text-muted", theme.textMuted);
+  unitView.classList.add("unit-theme-active");
+  unitView.dataset.unitTheme = unitId;
+  unitView.style.setProperty("--unit-primary", theme.primary);
+  unitView.style.setProperty("--unit-secondary", theme.secondary);
+  unitView.style.setProperty("--unit-text", theme.text);
+  unitView.style.setProperty("--unit-text-muted", theme.textMuted);
 }
 
 function clearUnitTheme() {
-  document.body.classList.remove("unit-theme-active");
-  delete document.body.dataset.unitTheme;
+  unitView.classList.remove("unit-theme-active");
+  delete unitView.dataset.unitTheme;
+}
+
+function renderUnitNav(activeId) {
+  const nav = document.getElementById("unit-nav-bubbles");
+  nav.innerHTML = COURSE_DATA.units
+    .map(
+      (unit) => `
+    <button
+      type="button"
+      class="unit-nav-bubble${unit.id === activeId ? " is-active" : ""}"
+      data-unit-id="${unit.id}"
+      aria-label="Open ${unit.title}"
+      ${unit.id === activeId ? 'aria-current="page"' : ""}
+    >
+      <span class="unit-nav-bubble-label">${unit.shortLabel}</span>
+    </button>
+  `
+    )
+    .join("");
+
+  nav.querySelectorAll(".unit-nav-bubble").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.dataset.unitId !== activeUnitId) {
+        openUnit(btn.dataset.unitId);
+      }
+    });
+  });
 }
 
 function animateUnitOpen(button, unitId, onComplete) {
@@ -182,6 +209,7 @@ function showUnitContent(unit) {
 
   renderWorks(unit);
   applyUnitTheme(unit.id);
+  renderUnitNav(unit.id);
 
   homeView.classList.remove("active");
   homeView.hidden = true;
@@ -194,7 +222,9 @@ function openUnit(unitId, sourceButton) {
   const unit = COURSE_DATA.units.find((u) => u.id === unitId);
   if (!unit) return;
 
-  if (sourceButton) {
+  const fromHome = sourceButton && !activeUnitId;
+
+  if (fromHome) {
     animateUnitOpen(sourceButton, unitId, () => showUnitContent(unit));
   } else {
     showUnitContent(unit);
