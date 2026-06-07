@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLK_ST_313 — Motherhood as Survival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-accent" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Home View -->
+  <main id="home-view" class="view active">
+    <header class="hero">
+      <p class="nu-logo" aria-label="Northwestern University">Northwestern University</p>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <p class="course-code">BLK_ST_313</p>
+      <h1>Motherhood as Survival</h1>
+      <p class="subtitle">Black Women's Care, Memory, and Healing in the 1970s and 1980s</p>
+    </header>
+
+    <section class="description">
+      <p>This mini-course is about how Black women in the 1970s and 1980s used writing, film, art, and music to talk about motherhood and survival. In this course, motherhood does not only mean having a child. It also means protecting people. It means carrying memories. It means trying to keep a family or community together even when life is heavy.</p>
+      <p>For many Black women, care has been something expected from them. They are often asked to be strong, patient, forgiving, and giving. But this course asks what happens when those same women are tired. What happens when they are hurt too? Who cares for the women who are always expected to care for everyone else?</p>
+      <p>The Black Women Renaissance gave Black women space to tell these kinds of stories in their own voices. Their work did not make motherhood look simple or perfect. Instead, it showed motherhood as something full of love, pressure, pain, and strength. Sometimes motherhood appears through a mother and child. Other times, it appears through sisters, friends, elders, healers, or women who choose to care for each other.</p>
+      <p>This course asks a few main questions. How do Black women survive family wounds? How do they heal while still caring for others? How can care become a form of resistance? Through writers like Audre Lorde, Ntozake Shange, and Toni Cade Bambara, along with films like <em>Suzanne, Suzanne</em>, art by Betye Saar, and music by Sweet Honey in the Rock, students will see how Black women used creativity to tell the truth about care. These works show that motherhood can be beautiful, but it can also be exhausting. It can save people, but it can also ask too much. That is why this course treats motherhood as something powerful, complicated, and deeply human.</p>
+    </section>
+
+    <section class="units-section">
+      <h2 class="section-label">Explore the Course</h2>
+      <p class="section-hint">Hover for a preview · Click to open</p>
+      <div class="unit-bubbles" id="unit-bubbles"></div>
+    </section>
+  </main>
+
+  <!-- Unit Detail View -->
+  <main id="unit-view" class="view" hidden>
+    <button class="back-btn" id="back-btn" type="button" aria-label="Back to course overview">
+      <span aria-hidden="true">←</span> Back to overview
+    </button>
+    <header class="unit-header">
+      <p class="unit-number" id="unit-number"></p>
+      <h1 id="unit-title"></h1>
+      <p class="unit-description" id="unit-description"></p>
+    </header>
+    <div class="works-grid" id="works-grid"></div>
+  </main>
+
+  <!-- Work Detail Modal -->
+  <dialog id="work-modal" class="work-modal">
+    <button class="modal-close" id="modal-close" type="button" aria-label="Close">&times;</button>
+    <div class="modal-content">
+      <div class="modal-image-wrap">
+        <img id="modal-image" src="" alt="" class="modal-image">
+        <div class="modal-image-placeholder" id="modal-image-placeholder">
+          <span>Image coming soon</span>
+        </div>
+      </div>
+      <div class="modal-text">
+        <p class="modal-type" id="modal-type"></p>
+        <h2 id="modal-title"></h2>
+        <p class="modal-meta" id="modal-meta"></p>
+        <p class="modal-description" id="modal-description"></p>
+        <a id="modal-link" class="modal-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
+          View resource →
+        </a>
+        <p class="modal-link-placeholder" id="modal-link-placeholder">Link coming soon</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
