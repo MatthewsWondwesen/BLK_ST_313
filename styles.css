@@ -135,11 +135,11 @@ body {
   padding-top: 1rem;
 }
 
-.nu-logo {
+.course-brand {
   font-family: var(--font-body);
   font-size: clamp(1.25rem, 3.2vw, 1.65rem);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: var(--purple-100);
   margin-bottom: 1.25rem;
 }
@@ -166,19 +166,9 @@ body {
 .hero-divider::before { left: -4px; }
 .hero-divider::after { right: -4px; }
 
-.course-code {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--purple-100);
-  margin-bottom: 1rem;
-}
-
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-size: clamp(2rem, 5vw, 3.1rem);
   font-weight: 600;
   line-height: 1.15;
   margin-bottom: 0.75rem;
