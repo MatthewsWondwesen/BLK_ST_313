@@ -16,7 +16,7 @@ const COURSE_DATA = {
           year: "1979",
           description:
             "In this essay, Audre Lorde writes about raising her son as a Black lesbian feminist mother. She is honest about the responsibility of loving him while also trying to teach him a different way to be a man. Lorde does not make motherhood sound easy. She shows it as careful, emotional work. This reading helps us see motherhood as something intentional. She is not only raising a child. She is trying to raise him with values that resist the sexism and harm around him.",
-          image: "assets/Screenshot%202026-06-06%20232425.png",
+          image: "Screenshot%202026-06-06%20232425.png",
           link: "https://challengingmalesupremacy.org/wp-content/uploads/2015/04/Man-Child-Audre-Lorde.pdf",
         },
         {
@@ -27,7 +27,7 @@ const COURSE_DATA = {
           year: "1982",
           description:
             "This novel follows three Black sisters and their mother as each daughter searches for her own path. The story moves through art, home, spirituality, letters, and the everyday ways women stay connected. It fits this unit because it shows how family can shape a person without fully defining them. The daughters inherit parts of their mother and their home, but they also have to figure out who they are for themselves. Shange shows that becoming your own person can still be tied to the people who raised you.",
-          image: "assets/Screenshot%202026-06-06%20232516.png",
+          image: "Screenshot%202026-06-06%20232516.png",
           link: "https://www.amazon.com/dp/B004A90E58?ref=KC_GS_GB_US",
         },
         {
@@ -38,7 +38,7 @@ const COURSE_DATA = {
           year: "1982",
           description:
             "This short documentary follows Suzanne as she talks about addiction, family trauma, and painful memories from childhood. It is not an easy film, but that is what makes it important. It shows what can happen when hurt stays hidden in a family for too long. The film connects to this unit because it shows that healing often starts when someone finally tells the truth. Survival here is not neat. It begins with facing what happened.",
-          image: "assets/suzanne,%20suzanne.jpg",
+          image: "suzanne,%20suzanne.jpg",
           link: "https://video.alexanderstreet.com/watch/suzanne-suzanne",
         },
         {
@@ -50,7 +50,7 @@ const COURSE_DATA = {
           album: "Breaths",
           description:
             "This song asks listeners to think about children as people with their own lives. It connects to motherhood because it challenges the idea that loving a child means controlling them. The song suggests that care should leave room for freedom. In this unit, it helps us think about parenting as both protection and letting go.",
-          image: "assets/sweet%20honey%20in%20the%20rock%20on%20children.png",
+          image: "sweet%20honey%20in%20the%20rock%20on%20children.png",
           link: "https://www.youtube.com/watch?v=kYAkcL36aCE",
         },
       ],
@@ -71,7 +71,7 @@ const COURSE_DATA = {
           year: "1980",
           description:
             "Bambara's novel focuses on Velma Henry, a Black woman activist who is deeply tired and in need of healing. Minnie Ransom, a healer, tries to help her come back to herself. This reading is important because Velma's pain is not only personal. It is tied to the pressure of activism and the weight of being needed by everyone. The novel asks a hard question: who heals the women everyone depends on? It shows that survival sometimes begins with admitting you cannot keep carrying everything alone.",
-          image: "assets/the%20salt%20eaters%20toni%20cade%20bambara.png",
+          image: "the%20salt%20eaters%20toni%20cade%20bambara.png",
           link: "https://archive.org/details/salteaters0000bamb",
         },
         {
@@ -82,7 +82,7 @@ const COURSE_DATA = {
           year: "1982",
           description:
             "In Zami, Audre Lorde tells her life story through memory and the women who shaped her. The book expands the meaning of motherhood because care does not only come from one mother. It can come from friends, lovers, elders, and chosen family. Lorde shows that Black women often survive because someone sees them clearly and helps them become themselves.",
-          image: "assets/Zami%20A%20New%20Spelling%20of%20My%20Name%20Audre%20Lorde.jpg",
+          image: "Zami%20A%20New%20Spelling%20of%20My%20Name%20Audre%20Lorde.jpg",
           link: "https://dokumen.pub/zami-a-new-spelling-of-my-name-a-biomythography-9780307780812-9780895941411-0895941414-9780895947666-0895947668-9780895940995-0307780813.html",
         },
         {
@@ -93,7 +93,7 @@ const COURSE_DATA = {
           year: "1972",
           description:
             "Betye Saar's artwork takes the racist image of Aunt Jemima and changes it into an image of power. This piece matters because Black women have often been forced into the role of caretaker for everyone else. Saar refuses that limited image. She turns a symbol of service into a symbol of resistance. In this course, the artwork helps us see how Black women pushed back against images that tried to make them small.",
-          image: "assets/The%20Liberation%20of%20Aunt%20Jemima%20Betye%20Saar.png",
+          image: "The%20Liberation%20of%20Aunt%20Jemima%20Betye%20Saar.png",
           link: "https://revolution.berkeley.edu/liberation-aunt-jemima/",
         },
         {
@@ -104,7 +104,7 @@ const COURSE_DATA = {
           year: "1988",
           description:
             "Ella's Song honors Ella Baker and the belief that ordinary people can create change together. The song connects care to activism. It shows that care is not always quiet or private. Sometimes care means organizing, teaching, singing, and refusing to give up on a community. The group's voices make the song feel shared, like survival is something people build together.",
-          image: "assets/Screenshot%202026-06-06%20232655.png",
+          image: "Screenshot%202026-06-06%20232655.png",
           link: "https://www.youtube.com/watch?v=U6Uus--gFrc",
         },
       ],
