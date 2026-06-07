@@ -111,9 +111,9 @@ const COURSE_DATA = {
     },
     {
       id: "assignment",
-      number: "Assignment",
+      number: "Final Assignment",
       title: "Motherhood as Survival Portfolio",
-      shortLabel: "Portfolio",
+      shortLabel: "Final Assignment",
       description:
         "For this assignment, students will create a Motherhood as Survival Portfolio. Each student will choose three works from the course. One should be a written text. One should be a film or visual artwork. One should be a song. In a 4–5 page paper, students will explain how these works show motherhood, care, memory, or healing as a way of surviving.",
       works: [],
