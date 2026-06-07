@@ -111,7 +111,7 @@ const COURSE_DATA = {
     },
     {
       id: "assignment",
-      number: "Final Assignment",
+      number: "Assignment",
       title: "Motherhood as Survival Portfolio",
       shortLabel: "Final Assignment",
       description:
