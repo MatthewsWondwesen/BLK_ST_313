@@ -72,6 +72,10 @@ function clearUnitTheme() {
   delete unitView.dataset.unitTheme;
 }
 
+function unitNavLabel(unit) {
+  return unit.id === "assignment" ? unit.number : unit.shortLabel;
+}
+
 function renderUnitNav(activeId) {
   const nav = document.getElementById("unit-nav-bubbles");
   nav.innerHTML = COURSE_DATA.units
@@ -84,7 +88,7 @@ function renderUnitNav(activeId) {
       aria-label="Open ${unit.title}"
       ${unit.id === activeId ? 'aria-current="page"' : ""}
     >
-      <span class="unit-nav-bubble-label">${unit.shortLabel}</span>
+      <span class="unit-nav-bubble-label">${unitNavLabel(unit)}</span>
     </button>
   `
     )
