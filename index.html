@@ -12,6 +12,7 @@
 <body>
   <div class="page-accent" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div id="unit-zoom-overlay" class="unit-zoom-overlay" hidden aria-hidden="true"></div>
 
   <!-- Home View -->
   <main id="home-view" class="view active">
@@ -42,6 +43,10 @@
     <button class="back-btn" id="back-btn" type="button" aria-label="Back to course overview">
       <span aria-hidden="true">←</span> Back to overview
     </button>
+    <div class="unit-hero-bubble" id="unit-hero-bubble">
+      <span class="unit-hero-number"></span>
+      <span class="unit-hero-label"></span>
+    </div>
     <header class="unit-header">
       <p class="unit-number" id="unit-number"></p>
       <h1 id="unit-title"></h1>
@@ -49,29 +54,6 @@
     </header>
     <div class="works-grid" id="works-grid"></div>
   </main>
-
-  <!-- Work Detail Modal -->
-  <dialog id="work-modal" class="work-modal">
-    <button class="modal-close" id="modal-close" type="button" aria-label="Close">&times;</button>
-    <div class="modal-content">
-      <div class="modal-image-wrap">
-        <img id="modal-image" src="" alt="" class="modal-image">
-        <div class="modal-image-placeholder" id="modal-image-placeholder">
-          <span>Image coming soon</span>
-        </div>
-      </div>
-      <div class="modal-text">
-        <p class="modal-type" id="modal-type"></p>
-        <h2 id="modal-title"></h2>
-        <p class="modal-meta" id="modal-meta"></p>
-        <p class="modal-description" id="modal-description"></p>
-        <a id="modal-link" class="modal-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
-          View resource →
-        </a>
-        <p class="modal-link-placeholder" id="modal-link-placeholder">Link coming soon</p>
-      </div>
-    </div>
-  </dialog>
 
   <script src="data.js"></script>
   <script src="app.js"></script>

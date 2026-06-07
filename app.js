@@ -2,9 +2,33 @@ const homeView = document.getElementById("home-view");
 const unitView = document.getElementById("unit-view");
 const unitBubbles = document.getElementById("unit-bubbles");
 const backBtn = document.getElementById("back-btn");
-const workModal = document.getElementById("work-modal");
+const zoomOverlay = document.getElementById("unit-zoom-overlay");
 
 let activeUnitId = null;
+
+const UNIT_THEMES = {
+  "unit-1": {
+    primary: "#4e2a84",
+    secondary: "#836eaa",
+    gradient: "radial-gradient(circle at 35% 30%, #836eaa, #4e2a84)",
+    text: "#ffffff",
+    textMuted: "#e4e0ee",
+  },
+  "unit-2": {
+    primary: "#401f68",
+    secondary: "#4e2a84",
+    gradient: "radial-gradient(circle at 35% 30%, #4e2a84, #401f68)",
+    text: "#ffffff",
+    textMuted: "#e4e0ee",
+  },
+  assignment: {
+    primary: "#836eaa",
+    secondary: "#4e2a84",
+    gradient: "radial-gradient(circle at 35% 30%, #836eaa, #401f68)",
+    text: "#ffffff",
+    textMuted: "#e4e0ee",
+  },
+};
 
 function renderUnitBubbles() {
   unitBubbles.innerHTML = COURSE_DATA.units
@@ -31,20 +55,64 @@ function renderUnitBubbles() {
     .join("");
 
   unitBubbles.querySelectorAll(".unit-bubble").forEach((btn) => {
-    btn.addEventListener("click", () => openUnit(btn.dataset.unitId));
+    btn.addEventListener("click", () => openUnit(btn.dataset.unitId, btn));
   });
 }
 
-function openUnit(unitId) {
-  const unit = COURSE_DATA.units.find((u) => u.id === unitId);
-  if (!unit) return;
+function applyUnitTheme(unitId) {
+  const theme = UNIT_THEMES[unitId];
+  if (!theme) return;
 
-  activeUnitId = unitId;
+  document.body.classList.add("unit-theme-active");
+  document.body.dataset.unitTheme = unitId;
+  document.body.style.setProperty("--unit-primary", theme.primary);
+  document.body.style.setProperty("--unit-secondary", theme.secondary);
+  document.body.style.setProperty("--unit-text", theme.text);
+  document.body.style.setProperty("--unit-text-muted", theme.textMuted);
+}
 
-  document.getElementById("unit-number").textContent = unit.number;
-  document.getElementById("unit-title").textContent = unit.title;
-  document.getElementById("unit-description").textContent = unit.description;
+function clearUnitTheme() {
+  document.body.classList.remove("unit-theme-active");
+  delete document.body.dataset.unitTheme;
+}
 
+function animateUnitOpen(button, unitId, onComplete) {
+  const inner = button.querySelector(".bubble-inner");
+  const rect = inner.getBoundingClientRect();
+  const theme = UNIT_THEMES[unitId];
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  zoomOverlay.style.background = theme.gradient;
+  zoomOverlay.style.left = `${cx}px`;
+  zoomOverlay.style.top = `${cy}px`;
+  zoomOverlay.style.width = `${rect.width}px`;
+  zoomOverlay.style.height = `${rect.height}px`;
+  zoomOverlay.hidden = false;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      zoomOverlay.classList.add("is-expanding");
+    });
+  });
+
+  const finish = () => {
+    zoomOverlay.classList.remove("is-expanding");
+    zoomOverlay.hidden = true;
+    onComplete();
+  };
+
+  zoomOverlay.addEventListener("transitionend", finish, { once: true });
+  setTimeout(finish, 900);
+}
+
+function workMeta(work) {
+  return [work.author, work.year, work.album ? `from ${work.album}` : ""]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function renderWorks(unit) {
   const worksGrid = document.getElementById("works-grid");
 
   if (unit.isAssignment) {
@@ -62,46 +130,80 @@ function openUnit(unitId) {
       </div>
     `;
     worksGrid.classList.add("assignment-only");
-  } else {
-    worksGrid.classList.remove("assignment-only");
-    worksGrid.innerHTML = unit.works
-      .map(
-        (work, index) => `
-      <button
-        class="work-bubble"
-        type="button"
-        data-work-id="${work.id}"
-        data-unit-id="${unit.id}"
-        style="--work-index: ${index}"
-        aria-label="View ${work.title} by ${work.author}"
-      >
-        <span class="work-bubble-inner">
-          <span class="work-type">${work.type}</span>
-          <span class="work-title">${work.title}</span>
-          <span class="work-author">${work.author}</span>
-        </span>
-        <span class="work-tooltip" role="tooltip">${truncate(work.description, 140)}</span>
-      </button>
-    `
-      )
-      .join("");
-
-    worksGrid.querySelectorAll(".work-bubble").forEach((btn) => {
-      btn.addEventListener("click", () =>
-        openWorkModal(btn.dataset.unitId, btn.dataset.workId)
-      );
-    });
+    return;
   }
+
+  worksGrid.classList.remove("assignment-only");
+  worksGrid.innerHTML = unit.works
+    .map(
+      (work, index) => `
+    <article class="work-item ${index % 2 === 1 ? "work-item--reverse" : ""}" style="--work-index: ${index}">
+      <div class="work-visual">
+        <div class="work-image-bubble">
+          ${
+            work.image
+              ? `<img src="${work.image}" alt="${work.title} cover" class="work-cover-image">`
+              : `<div class="work-cover-placeholder"><span>${work.type}</span></div>`
+          }
+        </div>
+        ${
+          work.link
+            ? `<a class="work-link-btn" href="${work.link}" target="_blank" rel="noopener noreferrer">View resource →</a>`
+            : `<span class="work-link-btn work-link-btn--disabled">Link coming soon</span>`
+        }
+      </div>
+      <div class="work-details">
+        <p class="work-type">${work.type}</p>
+        <h2 class="work-item-title">${work.title}</h2>
+        <p class="work-meta">${workMeta(work)}</p>
+        <p class="work-description">${work.description}</p>
+      </div>
+    </article>
+  `
+    )
+    .join("");
+}
+
+function showUnitContent(unit) {
+  activeUnitId = unit.id;
+
+  document.getElementById("unit-number").textContent = unit.number;
+  document.getElementById("unit-title").textContent = unit.title;
+  document.getElementById("unit-description").textContent = unit.description;
+
+  const heroBubble = document.getElementById("unit-hero-bubble");
+  heroBubble.querySelector(".unit-hero-number").textContent = unit.number;
+  heroBubble.querySelector(".unit-hero-label").textContent = unit.shortLabel;
+
+  const theme = UNIT_THEMES[unit.id];
+  if (theme) {
+    heroBubble.style.background = theme.gradient;
+  }
+
+  renderWorks(unit);
+  applyUnitTheme(unit.id);
 
   homeView.classList.remove("active");
   homeView.hidden = true;
   unitView.hidden = false;
   unitView.classList.add("active");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+function openUnit(unitId, sourceButton) {
+  const unit = COURSE_DATA.units.find((u) => u.id === unitId);
+  if (!unit) return;
+
+  if (sourceButton) {
+    animateUnitOpen(sourceButton, unitId, () => showUnitContent(unit));
+  } else {
+    showUnitContent(unit);
+  }
 }
 
 function goHome() {
   activeUnitId = null;
+  clearUnitTheme();
   unitView.classList.remove("active");
   unitView.hidden = true;
   homeView.hidden = false;
@@ -109,63 +211,6 @@ function goHome() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function openWorkModal(unitId, workId) {
-  const unit = COURSE_DATA.units.find((u) => u.id === unitId);
-  const work = unit?.works.find((w) => w.id === workId);
-  if (!work) return;
-
-  document.getElementById("modal-type").textContent = work.type;
-  document.getElementById("modal-title").textContent = work.title;
-  document.getElementById("modal-meta").textContent = [
-    work.author,
-    work.year,
-    work.album ? `from ${work.album}` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
-  document.getElementById("modal-description").textContent = work.description;
-
-  const modalImage = document.getElementById("modal-image");
-  const placeholder = document.getElementById("modal-image-placeholder");
-  const linkEl = document.getElementById("modal-link");
-  const linkPlaceholder = document.getElementById("modal-link-placeholder");
-
-  if (work.image) {
-    modalImage.src = work.image;
-    modalImage.alt = `${work.title} cover`;
-    modalImage.hidden = false;
-    placeholder.hidden = true;
-  } else {
-    modalImage.hidden = true;
-    modalImage.removeAttribute("src");
-    placeholder.hidden = false;
-  }
-
-  if (work.link) {
-    linkEl.href = work.link;
-    linkEl.hidden = false;
-    linkPlaceholder.hidden = true;
-  } else {
-    linkEl.hidden = true;
-    linkPlaceholder.hidden = false;
-  }
-
-  workModal.showModal();
-}
-
-function truncate(text, max) {
-  if (text.length <= max) return text;
-  return text.slice(0, max).trim() + "…";
-}
-
 backBtn.addEventListener("click", goHome);
-document.getElementById("modal-close").addEventListener("click", () => workModal.close());
-workModal.addEventListener("click", (e) => {
-  if (e.target === workModal) workModal.close();
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && workModal.open) workModal.close();
-});
 
 renderUnitBubbles();
